@@ -77,10 +77,87 @@ public class User {
 	void addCard()
 	{
 		Scanner sc = new Scanner(System.in);
-		String number = null, cardHolderName = null;
-		int secretCode = 0, expireDay = 0, expireMonth = 0;
-		//add card validation
+		String number, cardHolderName;
+		int secretCode, expireDay, expireMonth;
+		do
+		{
+			System.out.print("Enter card number: ");
+			number = sc.next();
+		}
+		while(!cardNumberValidation(number));
+		
+		do
+		{
+			System.out.print("Enter cardholder name: ");
+			cardHolderName = sc.next();
+		}
+		while(!cardNameValidation(cardHolderName));
+		
+		while(true)//Secret code validation
+		{
+			System.out.print("Enter secret code: ");
+			secretCode = sc.nextInt();
+			if(secretCode / 100 < 1 || secretCode / 100 > 9)
+				System.out.println("The secred code contains 3 digits");
+			else
+				break;
+		}
+		
+		while(true)//Expiration day validation
+		{
+			System.out.print("Enter exparation day: ");
+			expireDay = sc.nextInt();
+			if(!(expireDay > 0 && expireDay <= 31))
+				System.out.println("Please enter a valid day of the month");
+			else
+				break;
+		}
+		
+		while(true)//Expiration month validation
+		{
+			System.out.print("Enter exparation day: ");
+			expireMonth = sc.nextInt();
+			if(!(expireMonth > 0 && expireMonth <= 12))
+				System.out.println("Please enter a valid month");
+			else
+				break;
+		}
+		
+		
 		cards.add(new CreditCard(number, cardHolderName, secretCode, expireDay, expireMonth));
+	}
+		
+
+	private boolean cardNumberValidation(String number)
+	{
+		if(number.length() != 16)
+		{
+			System.out.println("Card numbers have 16 digits");
+			return false;
+		}
+		for(int i = 0; i < number.length(); i++)
+		{
+			if(number.charAt(i) < '0' || number.charAt(i) > '9')
+			{
+				System.out.println("The card number can only have digits");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean cardNameValidation(String cardHolderName)
+	{
+		String name = cardHolderName.toLowerCase();
+		for(int i = 0; i < name.length(); i++)
+		{
+			if(name.charAt(i) < 'a' || name.charAt(i) > 'z')
+			{
+				System.out.println("The cardholder name can only have letters");
+				return false;
+			}
+		}
+		return true;
 	}
 }
 	
