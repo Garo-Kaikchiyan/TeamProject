@@ -128,6 +128,10 @@ public class User {
 	}
 		
 
+	public String getName() {
+		return name;
+	}
+
 	private boolean cardNumberValidation(String number)
 	{
 		if(number.length() != 16)
