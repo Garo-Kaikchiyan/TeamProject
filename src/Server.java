@@ -5,9 +5,9 @@ import java.util.TreeSet;
 
 public class Server {
 
-	public static Server instance = new Server();
-	ArrayList<Picture> allPictures;
-	TreeMap<String, User> allUsers;
+	private static Server instance = new Server();
+	ArrayList<Picture> allPictures = new  ArrayList();
+	TreeMap<String, User> allUsers = new TreeMap();
 	
 	private Server(){}
 	
@@ -19,7 +19,12 @@ public class Server {
 		{
 			if(allUsers.get(name).getPassword().equals(password))
 				return allUsers.get(name);
+			else{
+				System.out.println("Incorrect password");
+				return null;
+			}
 		}
+		System.out.println("Incorrect username");
 		return null;
 	}
 	
@@ -45,10 +50,10 @@ public class Server {
 		{
 			System.out.print("Confirm password: ");
 			passConfirm = sc.next();
-			if(pass != passConfirm)
+			if(!pass.equals(passConfirm))
 				System.out.println("Password missmatch");
 		}
-		while(pass != passConfirm);
+		while(!pass.equals(passConfirm));
 		
 		allUsers.put(name, new User(name, pass));//adding a valid user to the database
 		

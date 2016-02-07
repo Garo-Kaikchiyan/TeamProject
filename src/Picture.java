@@ -40,7 +40,7 @@ public class Picture {
 	}
 	
 	public void buyPicture(User user){
-		user.
+		user.buyPicture(this);
 	}
 	
 	

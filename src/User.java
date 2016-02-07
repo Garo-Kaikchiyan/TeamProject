@@ -55,6 +55,7 @@ public class User {
 			System.out.println("You already own this picture.");
 		} else {
 			this.picturesOwned.add(picture);
+			System.out.println("Picture purchase successful");
 		}
 	}
 	
