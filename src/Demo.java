@@ -7,31 +7,42 @@ public class Demo {
 	public static void main(String[] args) {
 		//server.addUser();
 		Scanner sc = new Scanner(System.in);
-		int option = 0;
-		do{
-			System.out.println("Please enter the number of the option you want:");
-			System.out.println("1.Register\n2.Login\n3.View Pictures");
-			option = sc.nextInt();
-			if(option >= 1 && option <= 3)
+		while(true){
+			int option = 0;
+			do{
+				System.out.println("Please enter the number of the option you want:");
+				System.out.println("1.Register\n2.Login\n3.View Pictures");
+				option = sc.nextInt();
+				if(option >= 1 && option <= 3)
+					break;
+				else
+					System.out.println("Please enter a valid option (1, 2 or 3)");
+			}while(true);
+			
+			switch(option){
+			case 1:
+				server.addUser();
 				break;
-			else
-				System.out.println("Please enter a valid option (1, 2 or 3)");
-		}while(true);
-		
-		switch(option){
-		case 1:
-			server.addUser();
-			break;
-		case 2:
-			logIn()
+			case 2:
+				logIn();
+				break;
+			}
 		}
 	}
 	
-	public static boolean logIn(){
-		curUser = server.findUser(username, pass);
-		if(curUser == null)
-			return false;
-		return true;
+	public static void logIn(){
+		String username, pass;
+		curUser = null;
+		Scanner sc = new Scanner(System.in);
+		while(curUser == null){
+			System.out.print("Please enter your username: ");
+			username = sc.nextLine();
+			System.out.print("Please enter your password: ");
+			pass = sc.nextLine();
+			curUser = server.findUser(username, pass);
+		}
+		System.out.println("Login succesful!");
+		
 	}
 
 }
